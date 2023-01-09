@@ -39,27 +39,11 @@ vim.opt.listchars = {
 }
 
 vim.opt.ignorecase = true
-vim.opt.foldmethod = "syntax"
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldlevel = 3
 
 vim.opt.spelllang = "en,cjk"
 vim.opt.spellsuggest = "best,9"
 
 vim.opt.colorcolumn = "120"
-
--- highlight Cursor guifg=white guibg=black
--- highlight iCursor guifg=white guibg=steelblue
--- vim.opt.guicursor:append {
---   "n-v-c:block-Cursor",
---   "n-v-c:blinkon0",
---   "i:ver100-iCursor",
---   "i:blinkwait10"
--- }
-
--- set guitablabel=%N\ %f
--- set autoread
--- set backspace=eol,indent,start
--- set completeopt-=preview
--- set foldmethod=syntax
--- set foldlevel=3
--- autocmd FileType yaml setlocal foldmethod=indent

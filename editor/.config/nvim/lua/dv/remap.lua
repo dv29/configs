@@ -1,6 +1,6 @@
 vim.g.mapleader = " "
 
-vim.keymap.set("n", "<leader>v", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>vv", vim.cmd.Ex)
 vim.keymap.set("n", "<leader>h", ":set hls!<CR>")
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -24,7 +24,20 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+
+vim.keymap.set('n', '<leader>ft', function()
+
+  local ft = vim.bo.filetype
+  if (ft == 'javascript' or ft == 'typescript') then
+    vim.api.nvim_command('EslintFixAll')
+    return
+  end
+
+  vim.lsp.buf.format {
+    async = true,
+    -- filter = function(client) return client.name ~= "tsserver" end
+  }
+end)
 
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")

@@ -9,13 +9,6 @@ vim.g.jellybeans_overrides = {
   },
   background = { guibg = '000000' },
   ColorColumn = { guibg = '111111' },
-
-  -- CursorLine = { guifg = 'ffffff', guibg = 'ffffff', ctermbg = 'ffffff', ctermfg = 'ffffff' },
-  -- CursorLineNr = { guifg = 'ffffff', guibg = 'ffffff', ctermbg = 'ffffff', ctermfg = 'ffffff' },
-  -- CursorColumn = { guifg = 'ffffff', guibg = 'ffffff', ctermbg = 'ffffff', ctermfg = 'ffffff' },
-  -- Cursor = { guifg = 'ffffff', guibg = 'ffffff', ctermbg = 'ffffff', ctermfg = 'ffffff' },
-  -- iCursor = { guifg = 'ffffff', guibg = 'ffffff', ctermbg = 'ffffff', ctermfg = 'ffffff' },
-  -- TermCursor = { guifg = 'ffffff', guibg = 'ffffff', ctermbg = 'ffffff', ctermfg = 'ffffff' },
 }
 
 function SetColor()

@@ -1,0 +1,6 @@
+{
+  "prettyLog": {
+    "prefix": "ins",
+    "body": "console.log(require('util').inspect(${0}, { depth: null, colors: true }));"
+  }
+}

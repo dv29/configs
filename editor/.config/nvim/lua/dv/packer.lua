@@ -7,30 +7,21 @@ return require('packer').startup(function(use)
 
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.0',
-    requires = { { 'nvim-lua/plenary.nvim' } }
+    requires = { { 'nvim-lua/plenary.nvim', 'nvim-tree/nvim-web-devicons' } }
   }
 
   use { "nvim-telescope/telescope-file-browser.nvim" }
 
-  -- TODO: choose 1
-  -- use 'cocopon/iceberg.vim'
   use 'nanotech/jellybeans.vim'
-  -- use 'wesgibbs/vim-irblack'
 
   use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
 
-  -- TODO: see if this is needed
-  -- use 'preservim/nerdtree'
-  -- use 'nvim-tree/nvim-tree.lua'
-
   use 'tpope/vim-commentary'
-  -- use 'itchyny/lightline.vim'
- use {
+  use {
     'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
 
-  -- LSP
   use {
     'VonHeikemen/lsp-zero.nvim',
     requires = {
