@@ -13,6 +13,7 @@ return require('packer').startup(function(use)
   use { "nvim-telescope/telescope-file-browser.nvim" }
 
   use 'nanotech/jellybeans.vim'
+  use 'github/copilot.vim'
 
   use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
 
@@ -21,6 +22,9 @@ return require('packer').startup(function(use)
     'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
+
+  -- use('jose-elias-alvarez/null-ls.nvim')
+  use('MunifTanjim/prettier.nvim')
 
   use {
     'VonHeikemen/lsp-zero.nvim',

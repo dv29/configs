@@ -28,9 +28,17 @@ vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 vim.keymap.set('n', '<leader>ft', function()
 
   local ft = vim.bo.filetype
-  if (ft == 'javascript' or ft == 'typescript') then
-    vim.api.nvim_command('EslintFixAll')
+  -- if (ft == 'json') then
+  --   vim.cmd('Prettier')
+  -- end
+
+  if (ft == 'javascript') then
+    vim.cmd('EslintFixAll')
     return
+  end
+
+  if (ft == 'typescript') then
+    vim.cmd('EslintFixAll')
   end
 
   vim.lsp.buf.format {
@@ -53,3 +61,6 @@ vim.keymap.set("n", "<C-L>", "<C-W><C-L>")
 vim.keymap.set("n", "<C-H>", "<C-W><C-H>")
 
 vim.keymap.set("n", "<leader>l", ":set spell!<cr>")
+
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
+vim.keymap.set("n", "<leader>bn", ":bnext<CR>")
