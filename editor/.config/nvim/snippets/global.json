@@ -1,0 +1,6 @@
+{
+  "todo": {
+    "prefix": "todo",
+    "body": "TODO ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE} <Vora, Deep>: $0"
+  }
+}

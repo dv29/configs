@@ -1,0 +1,6 @@
+{
+  "prettyLog": {
+    "prefix": "ins",
+    "body": "console.log(JSON.stringify(${0}, null, 2));"
+  }
+}

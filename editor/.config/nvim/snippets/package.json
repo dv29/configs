@@ -7,10 +7,22 @@
     "snippets": [
       {
         "language": [
-          "javascript",
-          "typescript"
+          "all"
+        ],
+        "path": "./global.json"
+      },
+      {
+        "language": [
+          "javascript"
         ],
         "path": "./javascript.json"
+      },
+      {
+        "language": [
+          "typescript",
+          "typescriptreact"
+        ],
+        "path": "./typescript.json"
       }
     ]
   }
