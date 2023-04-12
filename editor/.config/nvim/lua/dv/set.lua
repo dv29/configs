@@ -47,3 +47,5 @@ vim.opt.spelllang = "en,cjk"
 vim.opt.spellsuggest = "best,9"
 
 vim.opt.colorcolumn = "120"
+
+vim.opt.shell = "/bin/bash -i"
