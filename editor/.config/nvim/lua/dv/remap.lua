@@ -64,3 +64,4 @@ vim.keymap.set("n", "<leader>l", ":set spell!<cr>")
 
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 vim.keymap.set("n", "<leader>bn", ":bnext<CR>")
+
