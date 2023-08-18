@@ -28,6 +28,10 @@ return require('packer').startup(function(use)
   -- use('jose-elias-alvarez/null-ls.nvim')
   use('MunifTanjim/prettier.nvim')
 
+  use 'jupyter-vim/jupyter-vim'
+  use 'simrat39/rust-tools.nvim'
+  use 'simrat39/inlay-hints.nvim'
+
   use {
     'VonHeikemen/lsp-zero.nvim',
     requires = {
@@ -55,5 +59,4 @@ return require('packer').startup(function(use)
     "iamcco/markdown-preview.nvim",
     run = function() vim.fn["mkdp#util#install"]() end,
   })
-
 end)
