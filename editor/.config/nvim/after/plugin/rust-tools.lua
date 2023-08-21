@@ -14,8 +14,8 @@ rust_tools.setup({
     -- end,
     inlay_hints = {
       auto = true,
-      -- only_current_line = false,
-      -- show_parameter_hints = true,
+      only_current_line = true,
+      show_parameter_hints = true,
       -- parameter_hints_prefix = "<- ",
       -- other_hints_prefix = "=> ",
       -- max_len_align = false,
@@ -77,8 +77,9 @@ rust_tools.setup({
         },
         maxStringLength = 25,
         renderColons = true,
+      displayInlayHints = true,
+      enable = true,
       },
-      displayInlayHints = true
     },
   }
 })

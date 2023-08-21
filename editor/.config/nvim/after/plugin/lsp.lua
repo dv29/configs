@@ -20,30 +20,32 @@ local cmp = require('cmp')
 local cmp_action = require('lsp-zero').cmp_action()
 
 cmp.setup({
-  mapping = {
-    -- `Enter` key to confirm completion
-    -- ['<CR>'] = cmp.mapping.confirm({ select = false }),
-
+  mapping = cmp.mapping.preset.insert({
     -- Ctrl+Space to trigger completion menu
     ['<C-Space>'] = cmp.mapping.complete(),
 
-    ['<C-k>'] = cmp.mapping.select_prev_item(cmp.SelectBehavior.Select),
-    ['<C-j>'] = cmp.mapping.select_next_item(cmp.SelectBehavior.Select),
+    ['<C-k>'] = cmp.mapping.select_prev_item(),
+    ['<C-j>'] = cmp.mapping.select_next_item(),
     ['<C-y>'] = cmp.mapping.confirm({ select = true }),
 
     -- Navigate between snippet placeholder
     ['<C-f>'] = cmp_action.luasnip_jump_forward(),
     ['<C-b>'] = cmp_action.luasnip_jump_backward(),
-
-    ['<Tab>'] = nil,
-    ['<S-Tab>'] = nil,
-  }
+    -- ['<Tab>'] = nil,
+    -- ['<S-Tab>'] = nil,
+  })
 })
 
-lsp.on_attach(function(_, bufnr)
+
+lsp.on_attach(function(client, bufnr)
   local opts = { buffer = bufnr, remap = false }
 
   -- local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+  -- if client.server_capabilities.inlayHintProvider then
+  --   print('Enabling inlay hints')
+  --   vim.lsp.buf.inlay_hint(bufnr, true)
+  -- end
 
   -- if client.name == 'rust_analyzer' then
   --   local rt = require('rust-tools')
@@ -65,9 +67,9 @@ lsp.on_attach(function(_, bufnr)
   vim.keymap.set("n", "<leader>rd", "<cmd>RustOpenExternalDocs<Cr>", opts)
 end)
 
--- lsp.nvim_lua_ls().configure()
+require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
--- lsp.skip_server_setup({ 'rust_analyzer' })
+lsp.skip_server_setup({ 'rust_analyzer' })
 
 lsp.setup()
 

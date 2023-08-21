@@ -59,4 +59,7 @@ return require('packer').startup(function(use)
     "iamcco/markdown-preview.nvim",
     run = function() vim.fn["mkdp#util#install"]() end,
   })
+
+  --  LSP status
+  use('j-hui/fidget.nvim')
 end)
