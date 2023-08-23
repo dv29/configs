@@ -39,6 +39,7 @@ vim.keymap.set('n', '<leader>ft', function()
 
   if (ft == 'typescript') then
     vim.cmd('EslintFixAll')
+    return
   end
 
   vim.lsp.buf.format {

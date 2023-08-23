@@ -25,8 +25,11 @@ return require('packer').startup(function(use)
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
 
-  -- use('jose-elias-alvarez/null-ls.nvim')
+  use('jose-elias-alvarez/null-ls.nvim')
   use('MunifTanjim/prettier.nvim')
+
+  use 'ray-x/go.nvim'
+  use 'ray-x/guihua.lua'
 
   use {
     'VonHeikemen/lsp-zero.nvim',
@@ -56,4 +59,5 @@ return require('packer').startup(function(use)
     run = function() vim.fn["mkdp#util#install"]() end,
   })
 
+  use 'tomlion/vim-solidity'
 end)
