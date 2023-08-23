@@ -61,5 +61,8 @@ return require('packer').startup(function(use)
   })
 
   --  LSP status
-  use('j-hui/fidget.nvim')
+  use {
+    'j-hui/fidget.nvim',
+    tag = 'legacy'
+  }
 end)
