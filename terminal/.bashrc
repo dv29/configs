@@ -45,6 +45,8 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
+alias vim='nvim'
+
 alias g="git"
 alias gb="git branch"
 alias gs="git status"

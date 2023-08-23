@@ -66,5 +66,8 @@ return require('packer').startup(function(use)
   use 'tomlion/vim-solidity'
 
   --  LSP status
-  use('j-hui/fidget.nvim')
+  use {
+    'j-hui/fidget.nvim',
+    tag = 'legacy'
+  }
 end)
