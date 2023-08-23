@@ -1,34 +1,4 @@
-local lsp = require("lsp-zero")
-
-lsp.preset("recommended")
-
-lsp.ensure_installed({
-  'tsserver',
-  'eslint',
-  -- 'sumneko_lua',
-  'rust_analyzer',
-})
-
-local cmp = require('cmp')
-
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
-local cmp_mappings = lsp.defaults.cmp_mappings({
-  ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
-  ['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
-  ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-  ["<C-Space>"] = cmp.mapping.complete(),
-})
-
--- disable completion with tab
--- this helps with copilot setup
-cmp_mappings['<Tab>'] = nil
-cmp_mappings['<S-Tab>'] = nil
-
-lsp.setup_nvim_cmp({
-  mapping = cmp_mappings
-})
-
-lsp.set_preferences({
+local lsp = require("lsp-zero").preset({
   suggest_lsp_servers = true,
   sign_icons = {
     error = 'E',
@@ -38,8 +8,50 @@ lsp.set_preferences({
   }
 })
 
-lsp.on_attach(function(_, bufnr)
+lsp.ensure_installed({
+  'tsserver',
+  'eslint',
+  'lua_ls',
+  'rust_analyzer',
+  'pyright',
+})
+
+local cmp = require('cmp')
+local cmp_action = require('lsp-zero').cmp_action()
+
+cmp.setup({
+  mapping = cmp.mapping.preset.insert({
+    -- Ctrl+Space to trigger completion menu
+    ['<C-Space>'] = cmp.mapping.complete(),
+
+    ['<C-k>'] = cmp.mapping.select_prev_item(),
+    ['<C-j>'] = cmp.mapping.select_next_item(),
+    ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+
+    -- Navigate between snippet placeholder
+    ['<C-f>'] = cmp_action.luasnip_jump_forward(),
+    ['<C-b>'] = cmp_action.luasnip_jump_backward(),
+    -- ['<Tab>'] = nil,
+    -- ['<S-Tab>'] = nil,
+  })
+})
+
+
+lsp.on_attach(function(client, bufnr)
   local opts = { buffer = bufnr, remap = false }
+
+  -- local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+  -- if client.server_capabilities.inlayHintProvider then
+  --   print('Enabling inlay hints')
+  --   vim.lsp.buf.inlay_hint(bufnr, true)
+  -- end
+
+  -- if client.name == 'rust_analyzer' then
+  --   local rt = require('rust-tools')
+  --   vim.keymap.set('n', '<C-space>', rt.hover_actions.hover_actions, opts)
+  --   vim.keymap.set('n', '<Leader>a', rt.code_action_group.code_action_group, opts)
+  -- end
 
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
   vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
@@ -52,17 +64,31 @@ lsp.on_attach(function(_, bufnr)
   vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)
   vim.keymap.set("n", "<leader>vrr", vim.lsp.buf.references, opts)
   vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename, opts)
-  vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
+  vim.keymap.set("i", "<leader>vh", vim.lsp.buf.signature_help, opts)
+  vim.keymap.set("n", "<leader>rd", "<cmd>RustOpenExternalDocs<Cr>", opts)
 end)
 
-lsp.nvim_workspace()
+require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+
+lsp.skip_server_setup({ 'rust_analyzer' })
+
 lsp.setup()
 
 vim.diagnostic.config({
-  virtual_text = true,
+  virtual_text = false,
   signs = true,
-  update_in_insert = false,
+  update_in_insert = true,
   underline = true,
   severity_sort = false,
-  float = true,
+  float = {
+    border = 'rounded',
+    source = 'always',
+    header = '',
+    prefix = '',
+  },
 })
+
+vim.cmd([[
+set signcolumn=yes
+autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+]])

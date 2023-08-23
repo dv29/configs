@@ -31,6 +31,10 @@ return require('packer').startup(function(use)
   use 'ray-x/go.nvim'
   use 'ray-x/guihua.lua'
 
+  use 'jupyter-vim/jupyter-vim'
+  use 'simrat39/rust-tools.nvim'
+  use 'simrat39/inlay-hints.nvim'
+
   use {
     'VonHeikemen/lsp-zero.nvim',
     requires = {
@@ -60,4 +64,7 @@ return require('packer').startup(function(use)
   })
 
   use 'tomlion/vim-solidity'
+
+  --  LSP status
+  use('j-hui/fidget.nvim')
 end)

@@ -23,7 +23,7 @@ GIT_PROMPT_ONLY_IN_REPO=1
 source ~/.bash-git-prompt/gitprompt.sh
 
 # bash settings 
-set -o vim
+set -o vi
 
 if [ $machine = 'Mac' ]; then
     alias ls='ls -G'
