@@ -1,48 +1,33 @@
 local lsp = require("lsp-zero")
 local rust_lsp = lsp.build_options('rust_analyzer', {})
 
--- require("lsp-inlayhints").setup()
-
 local rust_tools = require('rust-tools')
--- local inlay_hints = require("inlay-hints")
--- inlay_hints.setup()
-
-rust_tools.setup({
-  tools = {
-    -- on_initialized = function()
-    --   inlay_hints.set_all()
-    -- end,
-    inlay_hints = {
-      auto = true,
-      only_current_line = true,
-      show_parameter_hints = true,
-      -- parameter_hints_prefix = "<- ",
-      -- other_hints_prefix = "=> ",
-      -- max_len_align = false,
-      -- max_len_align_padding = 1,
-      -- right_align = false,
-      -- right_align_padding = 7,
-      -- highlight = "Comment",
-    },
-  },
-  -- server = rust_lsp,
-  server = {
-    -- on_attach = lsp.on_attach_buffer,
-    on_attach = function(_, bufnr)
-      -- Hover actions
-      vim.keymap.set("n", "<leader>ha", rust_tools.hover_actions.hover_actions, { buffer = bufnr })
-      -- Code action groups
-      vim.keymap.set("n", "<leader>ca", rust_tools.code_action_group.code_action_group, { buffer = bufnr })
-    end,
+--
+local custom_setting = {
+  on_attach = function(_, bufnr)
+    -- Hover actions
+    vim.keymap.set("n", "<leader>ha", rust_tools.hover_actions.hover_actions, { buffer = bufnr })
+    -- Code action groups
+    vim.keymap.set("n", "<leader>ca", rust_tools.code_action_group.code_action_group, { buffer = bufnr })
+  end,
+  settings = {
     ['rust-analyzer'] = {
+      assist = {
+        importMergeBehavior = "last",
+        importPrefix = "by_self",
+      },
       cargo = {
-        checkOnSave = {
-          command = "clippy",
-        },
+        loadOutDirsFromCheck = true,
+      },
+      procMacro = {
+        enable = true
+      },
+      check = {
+        command = "clippy",
       },
       inlayHints = {
         closingBraceHints = {
-          minLines = 10,
+          minLines = 100,
         },
         maxLength = 100,
         expressionAdjustmentHints = {
@@ -75,11 +60,29 @@ rust_tools.setup({
         discriminatorHints = {
           enable = true,
         },
-        maxStringLength = 25,
         renderColons = true,
-      displayInlayHints = true,
-      enable = true,
+        displayInlayHints = true,
+        enable = true,
       },
     },
   }
+}
+
+for k, v in pairs(custom_setting) do
+  rust_lsp[k] = v
+end
+
+rust_tools.setup({
+  tools = {
+    autoSetHints = true,
+    runnables = {
+      use_telescope = true
+    },
+    inlay_hints = {
+      auto = true,
+      only_current_line = true,
+      show_parameter_hints = true,
+    },
+  },
+  server = rust_lsp,
 })

@@ -40,19 +40,6 @@ cmp.setup({
 lsp.on_attach(function(client, bufnr)
   local opts = { buffer = bufnr, remap = false }
 
-  -- local client = vim.lsp.get_client_by_id(args.data.client_id)
-
-  -- if client.server_capabilities.inlayHintProvider then
-  --   print('Enabling inlay hints')
-  --   vim.lsp.buf.inlay_hint(bufnr, true)
-  -- end
-
-  -- if client.name == 'rust_analyzer' then
-  --   local rt = require('rust-tools')
-  --   vim.keymap.set('n', '<C-space>', rt.hover_actions.hover_actions, opts)
-  --   vim.keymap.set('n', '<Leader>a', rt.code_action_group.code_action_group, opts)
-  -- end
-
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
   vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
   -- vim.keymap.set("n", "gd", ":vsplit | lua vim.lsp.buf.definition()<CR>", opts)

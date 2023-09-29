@@ -33,7 +33,6 @@ return require('packer').startup(function(use)
 
   use 'jupyter-vim/jupyter-vim'
   use 'simrat39/rust-tools.nvim'
-  use 'simrat39/inlay-hints.nvim'
 
   use {
     'VonHeikemen/lsp-zero.nvim',
