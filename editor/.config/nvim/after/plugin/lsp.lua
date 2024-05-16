@@ -42,7 +42,7 @@ lsp.on_attach(function(client, bufnr)
 
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
   vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-  -- vim.keymap.set("n", "gd", ":vsplit | lua vim.lsp.buf.definition()<CR>", opts)
+  vim.keymap.set("n", "gv", ":vsplit | lua vim.lsp.buf.definition()<CR>", opts)
   vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
   vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
   vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
@@ -58,6 +58,12 @@ end)
 require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
 lsp.skip_server_setup({ 'rust_analyzer' })
+
+require("null-ls").setup({
+  sources = {
+    require("null-ls").builtins.formatting.yamlfmt,
+  },
+})
 
 lsp.setup()
 
