@@ -69,4 +69,10 @@ return require('packer').startup(function(use)
     'j-hui/fidget.nvim',
     tag = 'legacy'
   }
+
+  -- Packer.nvim, also make sure to install nvim-lua/plenary.nvim
+  use { 'sourcegraph/sg.nvim', run = 'nvim -l build/init.lua' }
+
+  -- And optionally, you can install telescope for some search functionality
+  --  "nvim-lua/plenary.nvim", --[[ "nvim-telescope/telescope.nvim ]]
 end)

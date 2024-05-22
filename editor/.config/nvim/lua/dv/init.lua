@@ -1,6 +1,7 @@
 require("dv.remap")
 require("dv.set")
 
+require("mason").setup()
 -- -- Mason Setup
 -- require("mason").setup({
 --     ui = {

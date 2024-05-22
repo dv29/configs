@@ -8,13 +8,27 @@ local lsp = require("lsp-zero").preset({
   }
 })
 
-lsp.ensure_installed({
-  'tsserver',
-  'eslint',
-  'lua_ls',
-  'rust_analyzer',
-  'pyright',
-})
+-- lsp.ensure_installed({
+--   'tsserver',
+--   'eslint',
+--   'lua_ls',
+--   'rust_analyzer',
+--   'pyright',
+--   'eslint-lsp',
+--   'prettier'
+-- })
+
+require("mason").setup()
+require("mason-lspconfig").setup {
+  ensure_installed = {
+    "lua_ls",
+    "rust_analyzer",
+    'tsserver',
+    'eslint',
+    'pyright',
+    'eslint'
+  },
+}
 
 local cmp = require('cmp')
 local cmp_action = require('lsp-zero').cmp_action()
@@ -42,16 +56,16 @@ lsp.on_attach(function(client, bufnr)
 
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
   vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-  -- vim.keymap.set("n", "gd", ":vsplit | lua vim.lsp.buf.definition()<CR>", opts)
+  vim.keymap.set("n", "gv", ":vsplit | lua vim.lsp.buf.definition()<CR>", opts)
   vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
   vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
   vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
   vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
   vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
-  vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)
-  vim.keymap.set("n", "<leader>vrr", vim.lsp.buf.references, opts)
-  vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename, opts)
-  vim.keymap.set("i", "<leader>vh", vim.lsp.buf.signature_help, opts)
+  vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+  vim.keymap.set("n", "<leader>rr", vim.lsp.buf.references, opts)
+  vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+  vim.keymap.set("i", "<leader>sh", vim.lsp.buf.signature_help, opts)
   vim.keymap.set("n", "<leader>rd", "<cmd>RustOpenExternalDocs<Cr>", opts)
 end)
 
