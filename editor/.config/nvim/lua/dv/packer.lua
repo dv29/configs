@@ -6,7 +6,7 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.0',
+    'nvim-telescope/telescope.nvim', tag = '0.1.5',
     requires = { { 'nvim-lua/plenary.nvim', 'nvim-tree/nvim-web-devicons' } }
   }
 
@@ -75,4 +75,13 @@ return require('packer').startup(function(use)
 
   -- And optionally, you can install telescope for some search functionality
   --  "nvim-lua/plenary.nvim", --[[ "nvim-telescope/telescope.nvim ]]
+  --
+  -- You'll also need plenary.nvim
+  -- use { 'nvim-lua/plenary.nvim' }
+
+  -- And optionally, you can install telescope for some search functionality
+  --  "nvim-lua/plenary.nvim", --[[ "nvim-telescope/telescope.nvim ]
+
+   -- use 'mfussenegger/nvim-dap'
+   -- use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 end)
