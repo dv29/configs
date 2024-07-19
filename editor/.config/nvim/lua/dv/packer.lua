@@ -31,7 +31,7 @@ return require('packer').startup(function(use)
   use 'ray-x/go.nvim'
   use 'ray-x/guihua.lua'
 
-  use 'jupyter-vim/jupyter-vim'
+  -- use 'jupyter-vim/jupyter-vim'
   use 'simrat39/rust-tools.nvim'
 
   use {
@@ -79,6 +79,6 @@ return require('packer').startup(function(use)
   -- And optionally, you can install telescope for some search functionality
   --  "nvim-lua/plenary.nvim", --[[ "nvim-telescope/telescope.nvim ]
 
-   use 'mfussenegger/nvim-dap'
-   use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+  use { 'mfussenegger/nvim-dap', requires = { "nvim-neotest/nvim-nio" } }
+  use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
 end)
