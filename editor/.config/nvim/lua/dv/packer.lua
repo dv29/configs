@@ -31,8 +31,11 @@ return require('packer').startup(function(use)
   use 'ray-x/go.nvim'
   use 'ray-x/guihua.lua'
 
-  -- use 'jupyter-vim/jupyter-vim'
-  use 'simrat39/rust-tools.nvim'
+  use {
+    'mrcjkb/rustaceanvim',
+    -- tag = '4.26.1',   -- Recommended
+    -- lazy = false, -- This plugin is already lazy
+  }
 
   use {
     'VonHeikemen/lsp-zero.nvim',
