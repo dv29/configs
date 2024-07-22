@@ -21,6 +21,7 @@ vim.g.jellybeans_overrides = {
 function SetColor()
   color = color or "jellybeans"
   vim.cmd.colorscheme(color)
+  vim.api.nvim_set_hl(0, "LspInlayHint", { bg = "#1D1D1D" })
 end
 
 SetColor()
