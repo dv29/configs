@@ -1,5 +1,5 @@
 require("sg").setup {
-  node_executable = "/usr/local/bin/node",
+  -- node_executable = "",
   enable_cody = true,
   auth_strategy = { "environment-variables" },
 }

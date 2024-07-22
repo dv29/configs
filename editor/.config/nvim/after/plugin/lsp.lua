@@ -28,12 +28,19 @@ require("mason-lspconfig").setup {
     'pyright',
     'eslint'
   },
+
 }
 
+local ls = require("luasnip")
 local cmp = require('cmp')
 local cmp_action = require('lsp-zero').cmp_action()
 
 cmp.setup({
+  snippet = {
+    expand = function(args)
+      ls.lsp_expand(args.body)
+    end,
+  },
   mapping = cmp.mapping.preset.insert({
     -- Ctrl+Space to trigger completion menu
     ['<C-Space>'] = cmp.mapping.complete(),
@@ -47,7 +54,11 @@ cmp.setup({
     ['<C-b>'] = cmp_action.luasnip_jump_backward(),
     -- ['<Tab>'] = nil,
     -- ['<S-Tab>'] = nil,
-  })
+  }),
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+  },
 })
 
 
@@ -71,7 +82,31 @@ end)
 
 require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
-lsp.skip_server_setup({ 'rust_analyzer' })
+-- lsp.skip_server_setup({ 'rust_analyzer' })
+
+-- setup your go.nvim
+require('go').setup {
+  lsp_cfg = true,
+  lsp_inlay_hints = {
+    enable = false,
+    only_current_line = true,
+  },
+}
+
+local cfg = require 'go.lsp'.config()
+
+local on_attach = cfg.on_attach
+
+cfg.on_attach = function(client, bufnr)
+  on_attach(client, bufnr)
+  vim.keymap.del('n', '<leader>ff', { buffer = bufnr })
+
+  -- if client.server_capabilities.inlayHintProvider then
+  --   vim.lsp.inlay_hint.enable(bufnr, { prefix = '', highlight = 'Comment' })
+  -- end
+end
+
+require('lspconfig').gopls.setup(cfg)
 
 require("null-ls").setup({
   sources = {
@@ -89,7 +124,7 @@ vim.diagnostic.config({
   severity_sort = false,
   float = {
     border = 'rounded',
-    source = 'always',
+    source = true,
     header = '',
     prefix = '',
   },

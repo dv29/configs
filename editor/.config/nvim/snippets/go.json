@@ -1,0 +1,11 @@
+{
+  "prettyLog": {
+    "prefix": "ins",
+    "body": [
+      "func(obj interface{}) {",
+      "  bytes, _ := json.MarshalIndent(obj, \"  \", \"  \")",
+      "  fmt.Println(string(bytes))",
+      "}(${0})"
+    ]
+  }
+}

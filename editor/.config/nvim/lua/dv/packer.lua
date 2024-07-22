@@ -82,6 +82,9 @@ return require('packer').startup(function(use)
   -- And optionally, you can install telescope for some search functionality
   --  "nvim-lua/plenary.nvim", --[[ "nvim-telescope/telescope.nvim ]
 
-   -- use 'mfussenegger/nvim-dap'
-   -- use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+  use 'mfussenegger/nvim-dap'
+  use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } }
+
+
+  use 'leoluz/nvim-dap-go'
 end)
