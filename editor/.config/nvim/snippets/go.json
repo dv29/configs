@@ -2,9 +2,9 @@
   "prettyLog": {
     "prefix": "ins",
     "body": [
-      "func(obj interface{}) {",
+      "func(label string, obj interface{}) {",
       "  bytes, _ := json.MarshalIndent(obj, \"  \", \"  \")",
-      "  fmt.Println(string(bytes))",
+      "  fmt.Printf(\"%s %s\\n\", label, string(bytes))",
       "}(${0})"
     ]
   }

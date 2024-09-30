@@ -31,8 +31,13 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("i", "<leader>sh", vim.lsp.buf.signature_help, opts)
   vim.keymap.set("n", "<leader>rd", "<cmd>RustOpenExternalDocs<Cr>", opts)
 
-  -- Keymap to toggle inlay hints
-  vim.keymap.set('n', '<leader>th', ':lua ToggleInlayHints()<CR>', { noremap = true, silent = true })
+
+  -- if golang set another keymap
+  if client.name == 'gopls' then
+    -- Keymap to toggle inlay hints
+    vim.keymap.set('n', '<leader>th', ':lua ToggleInlayHints()<CR>', { noremap = true, silent = true })
+    vim.keymap.set("n", "<leader>dc", ":GoDoc<CR><C-w><C-w>", opts)
+  end
 end)
 lsp.setup()
 
