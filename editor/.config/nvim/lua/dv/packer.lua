@@ -36,9 +36,15 @@ return require('packer').startup(function(use)
     -- tag = '4.26.1',   -- Recommended
     -- lazy = false, -- This plugin is already lazy
   }
+  
+  -- use({'VonHeikemen/lsp-zero.nvim', })
+  -- use({'neovim/nvim-lspconfig'})
+  -- use({'hrsh7th/nvim-cmp'})
+  -- use({'hrsh7th/cmp-nvim-lsp'})
 
   use {
     'VonHeikemen/lsp-zero.nvim',
+    branch = 'v4.x',
     requires = {
       -- LSP Support
       { 'neovim/nvim-lspconfig' },
@@ -73,8 +79,8 @@ return require('packer').startup(function(use)
     tag = 'legacy'
   }
 
-  -- Packer.nvim, also make sure to install nvim-lua/plenary.nvim
-  use { 'sourcegraph/sg.nvim', run = 'nvim -l build/init.lua' }
+  -- -- Packer.nvim, also make sure to install nvim-lua/plenary.nvim
+  -- use { 'sourcegraph/sg.nvim', run = 'nvim -l build/init.lua' }
 
   -- And optionally, you can install telescope for some search functionality
   --  "nvim-lua/plenary.nvim", --[[ "nvim-telescope/telescope.nvim ]]

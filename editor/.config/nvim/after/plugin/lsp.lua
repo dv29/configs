@@ -1,12 +1,13 @@
-local lsp = require("lsp-zero").preset({
-  suggest_lsp_servers = true,
-  sign_icons = {
-    error = 'E',
-    warn = 'W',
-    hint = 'H',
-    info = 'I'
-  }
-})
+local lsp = require("lsp-zero")
+-- .preset({
+--   suggest_lsp_servers = true,
+--   sign_icons = {
+--     error = 'E',
+--     warn = 'W',
+--     hint = 'H',
+--     info = 'I'
+--   }
+-- })
 
 -- Function to toggle inlay hints
 function ToggleInlayHints()
@@ -14,7 +15,11 @@ function ToggleInlayHints()
   vim.lsp.inlay_hint.enable(not enabled)
 end
 
-lsp.on_attach(function(client, bufnr)
+local lsp_zero = require('lsp-zero')
+
+-- lsp_attach is where you enable features that only work
+-- if there is a language server active in the file
+local lsp_attach = function(client, bufnr)
   local opts = { buffer = bufnr, remap = false }
 
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
@@ -38,7 +43,14 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set('n', '<leader>th', ':lua ToggleInlayHints()<CR>', { noremap = true, silent = true })
     vim.keymap.set("n", "<leader>dc", ":GoDoc<CR><C-w><C-w>", opts)
   end
-end)
+end
+
+lsp_zero.extend_lspconfig({
+  sign_text = true,
+  lsp_attach = lsp_attach,
+  capabilities = require('cmp_nvim_lsp').default_capabilities(),
+})
+
 lsp.setup()
 
 require('go').setup {
@@ -59,6 +71,8 @@ end
 
 require('lspconfig').gopls.setup(cfg)
 
+require('lspconfig').ts_ls.setup{}
+
 require("null-ls").setup({
   sources = {
     require("null-ls").builtins.formatting.yamlfmt,
@@ -72,8 +86,7 @@ require("mason-lspconfig").setup {
   ensure_installed = {
     "lua_ls",
     "rust_analyzer",
-    'tsserver',
-    'eslint',
+    'ts_ls',
     'pyright',
     'eslint',
   },

@@ -16,7 +16,7 @@ telescope.setup({
         ["<C-j>"] = actions.move_selection_next,
       },
     },
-    file_ignore_patterns = { "^.git/" },
+    file_ignore_patterns = { "^.git/", "*node_modules*" },
   },
   pickers = {
     find_files = {
