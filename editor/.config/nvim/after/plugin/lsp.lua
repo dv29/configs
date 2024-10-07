@@ -1,3 +1,4 @@
+local lspconfig = require 'lspconfig'
 local lsp = require("lsp-zero")
 -- .preset({
 --   suggest_lsp_servers = true,
@@ -69,9 +70,26 @@ cfg.on_attach = function(client, bufnr)
   vim.keymap.del('n', '<leader>ff', { buffer = bufnr })
 end
 
-require('lspconfig').gopls.setup(cfg)
+lspconfig.gopls.setup(cfg)
 
-require('lspconfig').ts_ls.setup{}
+local configs = require 'lspconfig/configs'
+
+if not configs.golangcilsp then
+  configs.golangcilsp = {
+    default_config = {
+      cmd = { 'golangci-lint-langserver' },
+      root_dir = lspconfig.util.root_pattern('.git', 'go.mod'),
+      init_options = {
+        command = { "golangci-lint", "run", "--enable-all", "--disable", "lll", "--out-format", "json", "--issues-exit-code=1" },
+      }
+    },
+  }
+end
+lspconfig.golangci_lint_ls.setup {
+  filetypes = { 'go', 'gomod' }
+}
+
+lspconfig.ts_ls.setup {}
 
 require("null-ls").setup({
   sources = {
@@ -79,7 +97,7 @@ require("null-ls").setup({
   },
 })
 
-require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 
 require("mason").setup()
 require("mason-lspconfig").setup {

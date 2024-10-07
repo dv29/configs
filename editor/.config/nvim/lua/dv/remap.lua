@@ -31,14 +31,14 @@ vim.keymap.set('n', '<leader>ft', function()
   --   vim.cmd('Prettier')
   -- end
 
-  if (ft == 'javascript' or ft == 'typescript' or ft == 'typescriptreact') then
-    vim.cmd([[
-      Prettier
-      EslintFixAll
-    ]])
-    -- vim.cmd("EslintFixAll")
-    return
-  end
+  -- if (ft == 'javascript' or ft == 'typescript' or ft == 'typescriptreact') then
+  --   vim.cmd([[
+  --     Prettier
+  --     EslintFixAll
+  --   ]])
+  --   -- vim.cmd("EslintFixAll")
+  --   return
+  -- end
 
   vim.lsp.buf.format {
     async = true,
