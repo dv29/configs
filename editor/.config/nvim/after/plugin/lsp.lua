@@ -1,3 +1,20 @@
+require("mason").setup()
+require("mason-lspconfig").setup {
+  ensure_installed = {
+    "lua_ls",
+    "rust_analyzer",
+    'ts_ls',
+    'pyright',
+    'eslint',
+    'pyright',
+    'golangci_lint_ls',
+    'gopls',
+    'nginx_language_server',
+    'taplo',
+    'terraformls',
+  },
+}
+
 local lspconfig = require 'lspconfig'
 local lsp = require("lsp-zero")
 -- .preset({
@@ -99,17 +116,12 @@ require("null-ls").setup({
 
 lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 
-require("mason").setup()
-require("mason-lspconfig").setup {
-  ensure_installed = {
-    "lua_ls",
-    "rust_analyzer",
-    'ts_ls',
-    'pyright',
-    'eslint',
-  },
-
+lspconfig.pyright.setup {
+  -- on_attach = lsp_attach,
+  -- capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
 }
+
+lspconfig.nginx_language_server.setup {}
 
 local ls = require("luasnip")
 local cmp = require('cmp')

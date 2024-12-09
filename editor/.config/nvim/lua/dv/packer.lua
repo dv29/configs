@@ -36,7 +36,7 @@ return require('packer').startup(function(use)
     -- tag = '4.26.1',   -- Recommended
     -- lazy = false, -- This plugin is already lazy
   }
-  
+
   -- use({'VonHeikemen/lsp-zero.nvim', })
   -- use({'neovim/nvim-lspconfig'})
   -- use({'hrsh7th/nvim-cmp'})
@@ -95,4 +95,20 @@ return require('packer').startup(function(use)
   use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
 
   use 'leoluz/nvim-dap-go'
+
+  use {
+    "kndndrj/nvim-dbee",
+    requires = {
+      "MunifTanjim/nui.nvim",
+    },
+    run = function()
+      -- Install tries to automatically detect the install method.
+      -- if it fails, try calling it with one of these parameters:
+      --    "curl", "wget", "bitsadmin", "go"
+      require("dbee").install()
+    end,
+    config = function()
+      require("dbee").setup( --[[optional config]])
+    end
+  }
 end)
