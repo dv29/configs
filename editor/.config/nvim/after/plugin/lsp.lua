@@ -108,9 +108,15 @@ lspconfig.golangci_lint_ls.setup {
 
 lspconfig.ts_ls.setup {}
 
-require("null-ls").setup({
+
+local null_ls = require("null-ls")
+null_ls.setup({
   sources = {
-    require("null-ls").builtins.formatting.yamlfmt,
+    null_ls.builtins.formatting.yamlfmt,
+    null_ls.builtins.formatting.sqlfluff,
+    null_ls.builtins.formatting.sqlfluff.with({
+      extra_args = { "--dialect", "postgres" },
+    }),
   },
 })
 
