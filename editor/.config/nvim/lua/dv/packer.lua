@@ -19,7 +19,6 @@ return require('packer').startup(function(use)
 
   use 'ThePrimeagen/harpoon'
 
-  use 'tpope/vim-commentary'
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
@@ -107,8 +106,15 @@ return require('packer').startup(function(use)
       --    "curl", "wget", "bitsadmin", "go"
       require("dbee").install()
     end,
-    config = function()
-      require("dbee").setup( --[[optional config]])
-    end
   }
+
+  use {
+    'numToStr/Comment.nvim',
+  }
+
+  use {
+    'JoosepAlviste/nvim-ts-context-commentstring',
+  }
+
+  use { 'kaarmu/typst.vim', ft = { 'typst' } }
 end)

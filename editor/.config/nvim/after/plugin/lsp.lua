@@ -6,12 +6,12 @@ require("mason-lspconfig").setup {
     'ts_ls',
     'pyright',
     'eslint',
-    'pyright',
     'golangci_lint_ls',
     'gopls',
     'nginx_language_server',
     'taplo',
     'terraformls',
+    'yamlls'
   },
 }
 
@@ -122,9 +122,15 @@ null_ls.setup({
 
 lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 
-lspconfig.pyright.setup {
-  -- on_attach = lsp_attach,
-  -- capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+lspconfig.taplo.setup {}
+lspconfig.yamlls.setup {}
+
+lspconfig.typst_lsp.setup {
+  settings = {
+    exportPdf = "onSave", -- Choose onType, onSave or never.
+    -- serverPath = "" -- Normally, there is no need to uncomment it.
+    -- cmd = "docker run ghcr.io/typst/typst:latest",
+  }
 }
 
 lspconfig.nginx_language_server.setup {}
