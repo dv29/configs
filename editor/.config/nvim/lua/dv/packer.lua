@@ -108,13 +108,7 @@ return require('packer').startup(function(use)
     end,
   }
 
-  use {
-    'numToStr/Comment.nvim',
-  }
+  use 'numToStr/Comment.nvim'
 
-  use {
-    'JoosepAlviste/nvim-ts-context-commentstring',
-  }
-
-  use { 'kaarmu/typst.vim', ft = { 'typst' } }
+  use 'JoosepAlviste/nvim-ts-context-commentstring'
 end)

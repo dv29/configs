@@ -11,7 +11,8 @@ require("mason-lspconfig").setup {
     'nginx_language_server',
     'taplo',
     'terraformls',
-    'yamlls'
+    'yamlls',
+    'tinymist',
   },
 }
 
@@ -125,12 +126,9 @@ lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 lspconfig.taplo.setup {}
 lspconfig.yamlls.setup {}
 
-lspconfig.typst_lsp.setup {
-  settings = {
-    exportPdf = "onSave", -- Choose onType, onSave or never.
-    -- serverPath = "" -- Normally, there is no need to uncomment it.
-    -- cmd = "docker run ghcr.io/typst/typst:latest",
-  }
+lspconfig.tinymist.settings = {
+  exportPdf = "onSave",
+  outputPath = "$root/target/$dir/$name",
 }
 
 lspconfig.nginx_language_server.setup {}
