@@ -27,9 +27,16 @@ vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
 vim.keymap.set('n', '<leader>ft', function()
   local ft = vim.bo.filetype
-  -- if (ft == 'json') then
-  --   vim.cmd('Prettier')
-  -- end
+
+  if (ft == 'go') then
+    vim.cmd('GoFmt')
+    return
+  end
+
+  if (ft == 'json') then
+    vim.cmd('Prettier')
+    return
+  end
 
   -- if (ft == 'javascript' or ft == 'typescript' or ft == 'typescriptreact') then
   --   vim.cmd([[

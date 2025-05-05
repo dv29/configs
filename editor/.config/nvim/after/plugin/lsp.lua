@@ -73,7 +73,9 @@ lsp_zero.extend_lspconfig({
 lsp.setup()
 
 require('go').setup {
+  gofmt = "golines",
   lsp_cfg = false,
+  max_line_len = 120,
   lsp_inlay_hints = {
     enable = false,
     only_current_line = true,
