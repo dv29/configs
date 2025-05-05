@@ -79,7 +79,11 @@ require('go').setup {
   lsp_inlay_hints = {
     enable = false,
     only_current_line = true,
-  }
+  },
+  gofmt = 'golines',
+  max_line_len = 120,
+  log_path = "/tmp/gonvim.log",
+  verbose = true,
 }
 local cfg = require 'go.lsp'.config()
 

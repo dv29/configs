@@ -8,6 +8,7 @@ require('lualine').setup {
     section_separators = { left = '', right = '' },
   },
   sections = {
+    lualine_b = {},
     lualine_c = { { 'filename', path = 1 } }
   },
   inactive_sections = {

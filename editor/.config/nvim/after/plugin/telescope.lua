@@ -23,7 +23,10 @@ telescope.setup({
       hidden = true
     },
     live_grep = {
-      hidden = true
+      hidden = true,
+      additional_args = function()
+        return { "--ignore-case" }
+      end
     }
   }
 })
