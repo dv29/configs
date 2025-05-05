@@ -90,6 +90,7 @@ cfg.on_attach = function(client, bufnr)
   vim.keymap.del('n', '<leader>ff', { buffer = bufnr })
 end
 
+lspconfig.pyright.setup{}
 lspconfig.gopls.setup(cfg)
 
 local configs = require 'lspconfig/configs'
