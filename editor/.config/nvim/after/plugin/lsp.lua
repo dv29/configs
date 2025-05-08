@@ -1,5 +1,11 @@
 require("mason").setup()
 require("mason-lspconfig").setup {
+  automatic_enable = {
+    exclude = {
+      "gopls",
+      "golangci_lint_ls",
+    }
+  },
   ensure_installed = {
     "lua_ls",
     "rust_analyzer",
@@ -94,7 +100,7 @@ cfg.on_attach = function(client, bufnr)
   vim.keymap.del('n', '<leader>ff', { buffer = bufnr })
 end
 
-lspconfig.pyright.setup{}
+lspconfig.pyright.setup {}
 lspconfig.gopls.setup(cfg)
 
 local configs = require 'lspconfig/configs'
@@ -111,7 +117,10 @@ if not configs.golangcilsp then
   }
 end
 lspconfig.golangci_lint_ls.setup {
-  filetypes = { 'go', 'gomod' }
+  filetypes = { 'go', 'gomod' },
+  init_options = {
+    command = { "golangci-lint", "run", "--enable-all", "--disable", "lll", "--out-format", "json", "--issues-exit-code=1" },
+  }
 }
 
 lspconfig.ts_ls.setup {}
