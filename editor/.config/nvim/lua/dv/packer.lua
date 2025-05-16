@@ -10,7 +10,6 @@
 -- end
 --
 -- local packer_bootstrap = ensure_packer()
-
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
@@ -85,10 +84,7 @@ return require('packer').startup(function(use)
   use 'tomlion/vim-solidity'
 
   --  LSP status
-  use {
-    'j-hui/fidget.nvim',
-    tag = 'legacy'
-  }
+  use { 'j-hui/fidget.nvim' }
 
   -- -- Packer.nvim, also make sure to install nvim-lua/plenary.nvim
   -- use { 'sourcegraph/sg.nvim', run = 'nvim -l build/init.lua' }
@@ -120,7 +116,7 @@ return require('packer').startup(function(use)
     end,
     config = function()
       require("dbee").setup( --[[optional config]])
-    end
+    end,
   }
 
   use 'numToStr/Comment.nvim'
