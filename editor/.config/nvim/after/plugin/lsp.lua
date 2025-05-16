@@ -24,6 +24,8 @@ require('mason-lspconfig').setup {
     'terraformls',
     'yamlls',
     'tinymist',
+    'sqls',
+    'sqlfluff',
   },
 }
 
