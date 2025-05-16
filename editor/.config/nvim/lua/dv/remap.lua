@@ -118,5 +118,6 @@ end)
 
 --- db mapping
 vim.keymap.set('n', '<Leader>db', function()
+  require("dbee").setup()
   require("dbee").toggle()
 end)
