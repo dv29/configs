@@ -17,11 +17,12 @@ return require('packer').startup(function(use)
 
   use {
     'nvim-telescope/telescope.nvim',
+    tag = '0.1.x',
     requires = { { 'nvim-lua/plenary.nvim', 'nvim-tree/nvim-web-devicons' } }
   }
   -- tag = '0.1.5',
 
-  use { "nvim-telescope/telescope-file-browser.nvim" }
+  use { 'nvim-telescope/telescope-file-browser.nvim' }
 
   use 'nanotech/jellybeans.vim'
   use 'github/copilot.vim'
@@ -58,8 +59,8 @@ return require('packer').startup(function(use)
     requires = {
       -- LSP Support
       { 'neovim/nvim-lspconfig' },
-      { "mason-org/mason.nvim" },
-      { "mason-org/mason-lspconfig.nvim" },
+      { 'mason-org/mason.nvim' },
+      { 'mason-org/mason-lspconfig.nvim' },
 
       -- Autocompletion
       { 'hrsh7th/nvim-cmp' },
@@ -77,8 +78,8 @@ return require('packer').startup(function(use)
 
   -- Markdown Preview
   use({
-    "iamcco/markdown-preview.nvim",
-    run = function() vim.fn["mkdp#util#install"]() end,
+    'iamcco/markdown-preview.nvim',
+    run = function() vim.fn['mkdp#util#install']() end,
   })
 
   use 'tomlion/vim-solidity'
@@ -90,29 +91,27 @@ return require('packer').startup(function(use)
   -- use { 'sourcegraph/sg.nvim', run = 'nvim -l build/init.lua' }
 
   -- And optionally, you can install telescope for some search functionality
-  --  "nvim-lua/plenary.nvim", --[[ "nvim-telescope/telescope.nvim ]]
+  --  'nvim-lua/plenary.nvim', --[[ 'nvim-telescope/telescope.nvim ]]
   --
   -- You'll also need plenary.nvim
   -- use { 'nvim-lua/plenary.nvim' }
 
   -- And optionally, you can install telescope for some search functionality
-  --  "nvim-lua/plenary.nvim", --[[ "nvim-telescope/telescope.nvim ]
+  --  'nvim-lua/plenary.nvim', --[[ 'nvim-telescope/telescope.nvim ]
 
-  use { 'mfussenegger/nvim-dap', requires = { "nvim-neotest/nvim-nio" } }
-  use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
+  use { 'mfussenegger/nvim-dap', requires = { 'nvim-neotest/nvim-nio' } }
+  use { 'rcarriga/nvim-dap-ui', requires = { 'mfussenegger/nvim-dap' } }
 
   use 'leoluz/nvim-dap-go'
+  use 'MunifTanjim/nui.nvim'
 
   use {
-    "kndndrj/nvim-dbee",
+    'kndndrj/nvim-dbee',
     requires = {
-      "MunifTanjim/nui.nvim",
+      'MunifTanjim/nui.nvim',
     },
     run = function()
-      -- Install tries to automatically detect the install method.
-      -- if it fails, try calling it with one of these parameters:
-      --    "curl", "wget", "bitsadmin", "go"
-      require("dbee").install()
+      require('dbee').install()
     end,
     config = function()
       require("dbee").setup( --[[optional config]])

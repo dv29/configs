@@ -1,17 +1,19 @@
-require("mason").setup()
-require("mason-lspconfig").setup {
+require('mason').setup()
+require('mason-lspconfig').setup {
   automatic_enable = {
     exclude = {
       "gopls",
-      "golangci_lint_ls",
       "ts_ls",
       "eslint",
       "rust_analyzer",
+      'golangci_lint_ls',
+      'lua_ls',
     }
   },
+  -- automatic_enable = false,
   ensure_installed = {
-    "lua_ls",
-    "rust_analyzer",
+    'lua_ls',
+    'rust_analyzer',
     'ts_ls',
     'pyright',
     'eslint',
@@ -26,7 +28,7 @@ require("mason-lspconfig").setup {
 }
 
 local lspconfig = require 'lspconfig'
-local lsp = require("lsp-zero")
+local lsp = require('lsp-zero')
 -- .preset({
 --   suggest_lsp_servers = true,
 --   sign_icons = {
@@ -50,26 +52,26 @@ local lsp_zero = require('lsp-zero')
 local lsp_attach = function(client, bufnr)
   local opts = { buffer = bufnr, remap = false }
 
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-  vim.keymap.set("n", "gv", ":vsplit | lua vim.lsp.buf.definition()<CR>", opts)
-  vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-  vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
-  vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
-  vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
-  vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
-  vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-  vim.keymap.set("n", "<leader>rr", vim.lsp.buf.references, opts)
-  vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-  vim.keymap.set("i", "<leader>sh", vim.lsp.buf.signature_help, opts)
-  vim.keymap.set("n", "<leader>rd", "<cmd>RustOpenExternalDocs<Cr>", opts)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+  vim.keymap.set('n', 'gv', ':vsplit | lua vim.lsp.buf.definition()<CR>', opts)
+  vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+  vim.keymap.set('n', '<leader>vws', vim.lsp.buf.workspace_symbol, opts)
+  vim.keymap.set('n', '<leader>vd', vim.diagnostic.open_float, opts)
+  vim.keymap.set('n', '[d', vim.diagnostic.goto_next, opts)
+  vim.keymap.set('n', ']d', vim.diagnostic.goto_prev, opts)
+  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
+  vim.keymap.set('n', '<leader>rr', vim.lsp.buf.references, opts)
+  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+  vim.keymap.set('i', '<leader>sh', vim.lsp.buf.signature_help, opts)
+  vim.keymap.set('n', '<leader>rd', '<cmd>RustOpenExternalDocs<Cr>', opts)
 
 
   -- if golang set another keymap
   if client.name == 'gopls' then
     -- Keymap to toggle inlay hints
     vim.keymap.set('n', '<leader>th', ':lua ToggleInlayHints()<CR>', { noremap = true, silent = true })
-    vim.keymap.set("n", "<leader>dc", ":GoDoc<CR><C-w><C-w>", opts)
+    vim.keymap.set('n', '<leader>dc', ':GoDoc<CR><C-w><C-w>', opts)
   end
 end
 
@@ -89,7 +91,7 @@ require('go').setup {
   },
   gofmt = 'golines',
   max_line_len = 120,
-  log_path = "/tmp/gonvim.log",
+  log_path = '/tmp/gonvim.log',
   verbose = true,
 }
 local cfg = require 'go.lsp'.config()
@@ -112,7 +114,7 @@ if not configs.golangcilsp then
       cmd = { 'golangci-lint-langserver' },
       root_dir = lspconfig.util.root_pattern('.git', 'go.mod'),
       init_options = {
-        command = { "golangci-lint", "run", "--enable-all", "--disable", "lll", "--out-format", "json", "--issues-exit-code=1" },
+        command = { 'golangci-lint', 'run', '--enable-all', '--disable', 'lll', '--out-format', 'json', '--issues-exit-code=1' },
       }
     },
   }
@@ -120,20 +122,20 @@ end
 lspconfig.golangci_lint_ls.setup {
   filetypes = { 'go', 'gomod' },
   init_options = {
-    command = { "golangci-lint", "run", "--enable-all", "--disable", "lll", "--out-format", "json", "--issues-exit-code=1" },
+    command = { 'golangci-lint', 'run', '--enable-all', '--disable', 'lll', '--out-format', 'json', '--issues-exit-code=1' },
   }
 }
 
 lspconfig.ts_ls.setup {}
 
 
-local null_ls = require("null-ls")
+local null_ls = require('null-ls')
 null_ls.setup({
   sources = {
     null_ls.builtins.formatting.yamlfmt,
     null_ls.builtins.formatting.sqlfluff,
     null_ls.builtins.formatting.sqlfluff.with({
-      extra_args = { "--dialect", "postgres" },
+      extra_args = { '--dialect', 'postgres' },
     }),
   },
 })
@@ -144,13 +146,13 @@ lspconfig.taplo.setup {}
 lspconfig.yamlls.setup {}
 
 lspconfig.tinymist.settings = {
-  exportPdf = "onSave",
-  outputPath = "$root/target/$dir/$name",
+  exportPdf = 'onSave',
+  outputPath = '$root/target/$dir/$name',
 }
 
 lspconfig.nginx_language_server.setup {}
 
-local ls = require("luasnip")
+local ls = require('luasnip')
 local cmp = require('cmp')
 local cmp_action = require('lsp-zero').cmp_action()
 
