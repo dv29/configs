@@ -25,33 +25,40 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
-vim.keymap.set('n', '<leader>ft', function()
-  local ft = vim.bo.filetype
+vim.api.nvim_set_keymap('n', '<leader>ft', '<cmd>lua vim.lsp.buf.format()<CR>',
+  { noremap = true, silent = true, desc = 'Format buffer' })
+--
+-- vim.keymap.set("n", "<Leader>f", function()
+--   vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
+-- end, { buffer = bufnr, desc = "[lsp] format" })
 
-  if (ft == 'go') then
-    vim.cmd('GoFmt')
-    return
-  end
-
-  if (ft == 'json') then
-    vim.cmd('Prettier')
-    return
-  end
-
-  -- if (ft == 'javascript' or ft == 'typescript' or ft == 'typescriptreact') then
-  --   vim.cmd([[
-  --     Prettier
-  --     EslintFixAll
-  --   ]])
-  --   -- vim.cmd("EslintFixAll")
-  --   return
-  -- end
-
-  vim.lsp.buf.format {
-    async = true,
-    -- filter = function(client) return client.name ~= "tsserver" end
-  }
-end)
+-- vim.keymap.set('n', '<leader>ft', function()
+--   local ft = vim.bo.filetype
+--
+--   if (ft == 'go') then
+--     vim.cmd('GoFmt')
+--     return
+--   end
+--
+--   -- if (ft == 'json') then
+--   --   vim.cmd('Prettier')
+--   --   return
+--   -- end
+--
+--   -- if (ft == 'javascript' or ft == 'typescript' or ft == 'typescriptreact') then
+--   --   vim.cmd([[
+--   --     Prettier
+--   --     EslintFixAll
+--   --   ]])
+--   --   -- vim.cmd("EslintFixAll")
+--   --   return
+--   -- end
+--
+--   vim.lsp.buf.format {
+--     async = true,
+--     -- filter = function(client) return client.name ~= "tsserver" end
+--   }
+-- end)
 
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")

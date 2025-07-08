@@ -2,12 +2,20 @@ require('mason').setup()
 require('mason-lspconfig').setup {
   automatic_enable = {
     exclude = {
-      "gopls",
-      "ts_ls",
-      "eslint",
-      "rust_analyzer",
-      'golangci_lint_ls',
       'lua_ls',
+      'rust_analyzer',
+      'ts_ls',
+      'pyright',
+      'eslint',
+      'golangci_lint_ls',
+      'gopls',
+      'nginx_language_server',
+      'taplo',
+      'terraformls',
+      'yamlls',
+      'tinymist',
+      'sqls',
+      'sqlfluff',
     }
   },
   -- automatic_enable = false,
@@ -83,7 +91,25 @@ lsp_zero.extend_lspconfig({
   capabilities = require('cmp_nvim_lsp').default_capabilities(),
 })
 
+
+vim.lsp.config('golangci_lint_ls', {
+  init_options = {
+    command = {
+      "golangci-lint",
+      "run",
+      "--output.json.path=stdout",
+      "--show-stats=false",
+      "--issues-exit-code=1",
+      "--path-mode=abs",
+    },
+  },
+})
+
 lsp.setup()
+
+lspconfig.golangci_lint_ls.setup {
+  filetypes = { 'go', 'gomod' },
+}
 
 require('go').setup {
   lsp_cfg = false,
@@ -107,43 +133,8 @@ end
 
 lspconfig.pyright.setup {}
 lspconfig.gopls.setup(cfg)
-
-local configs = require 'lspconfig/configs'
-
-if not configs.golangcilsp then
-  configs.golangcilsp = {
-    default_config = {
-      cmd = { 'golangci-lint-langserver' },
-      root_dir = lspconfig.util.root_pattern('.git', 'go.mod'),
-      init_options = {
-        command = { 'golangci-lint', 'run', '--enable-all', '--disable', 'lll', '--out-format', 'json', '--issues-exit-code=1' },
-      }
-    },
-  }
-end
-lspconfig.golangci_lint_ls.setup {
-  filetypes = { 'go', 'gomod' },
-  init_options = {
-    command = { 'golangci-lint', 'run', '--enable-all', '--disable', 'lll', '--out-format', 'json', '--issues-exit-code=1' },
-  }
-}
-
 lspconfig.ts_ls.setup {}
-
-
-local null_ls = require('null-ls')
-null_ls.setup({
-  sources = {
-    null_ls.builtins.formatting.yamlfmt,
-    null_ls.builtins.formatting.sqlfluff,
-    null_ls.builtins.formatting.sqlfluff.with({
-      extra_args = { '--dialect', 'postgres' },
-    }),
-  },
-})
-
 lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
-
 lspconfig.taplo.setup {}
 lspconfig.yamlls.setup {}
 
@@ -153,6 +144,20 @@ lspconfig.tinymist.settings = {
 }
 
 lspconfig.nginx_language_server.setup {}
+
+local null_ls = require('null-ls')
+null_ls.setup({
+  sources = {
+    null_ls.builtins.formatting.yamlfmt,
+    null_ls.builtins.formatting.sqlfluff,
+    null_ls.builtins.formatting.sqlfluff.with({
+      extra_args = { '--dialect', 'postgres' },
+    }),
+    null_ls.builtins.formatting.prettier
+  },
+  debug = true,
+})
+
 
 local ls = require('luasnip')
 local cmp = require('cmp')
@@ -202,3 +207,8 @@ vim.cmd([[
 set signcolumn=yes
 autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 ]])
+
+require("swagger-preview").setup({
+  -- The host to run the preview server on
+  host = "localhost",
+})

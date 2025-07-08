@@ -37,7 +37,7 @@ return require('packer').startup(function(use)
   }
 
   use('nvimtools/none-ls.nvim')
-  use('MunifTanjim/prettier.nvim')
+  -- use('MunifTanjim/prettier.nvim')
 
   use 'ray-x/go.nvim'
   use 'ray-x/guihua.lua'
@@ -127,4 +127,10 @@ return require('packer').startup(function(use)
   -- if packer_bootstrap then
   --   require('packer').sync()
   -- end
+  --
+  --
+  use {
+    "vinnymeller/swagger-preview.nvim",
+    run = "npm i",
+  }
 end)
