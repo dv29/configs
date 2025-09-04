@@ -129,9 +129,11 @@ vim.keymap.set('n', '<Leader>db', function()
   require("dbee").toggle()
 end)
 
--- Copy relative path to clipboard
 vim.keymap.set('n', '<Leader>cp', function()
-  vim.fn.setreg('+', vim.fn.expand('%'))
+  -- local cwd = vim.fn.getcwd()
+  local file_path = vim.fn.expand('%:p')
+  local relative_path = vim.fn.fnamemodify(file_path, ':.')
+  vim.fn.setreg('+', relative_path)
   vim.notify("Relative path copied to clipboard.")
 end, { desc = "Copy relative file path to clipboard" })
 
