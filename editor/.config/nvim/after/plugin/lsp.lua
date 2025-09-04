@@ -16,6 +16,7 @@ require('mason-lspconfig').setup {
       'tinymist',
       'sqls',
       'sqlfluff',
+      'pyright',
     }
   },
   -- automatic_enable = false,
@@ -117,8 +118,8 @@ require('go').setup {
     enable = false,
     only_current_line = true,
   },
-  gofmt = 'golines',
-  max_line_len = 120,
+  -- gofmt = 'golines',
+  -- max_line_len = 120,
   log_path = '/tmp/gonvim.log',
   verbose = true,
 }
@@ -137,6 +138,7 @@ lspconfig.ts_ls.setup {}
 lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 lspconfig.taplo.setup {}
 lspconfig.yamlls.setup {}
+lspconfig.terraformls.setup {}
 
 lspconfig.tinymist.settings = {
   exportPdf = 'onSave',
