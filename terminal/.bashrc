@@ -1,5 +1,3 @@
-# Install bash-git-prompt
-
 # getting the system information
 unameOut="$(uname -s)"
 case "${unameOut}" in
@@ -14,13 +12,7 @@ if [[ ! -d ~/.bash-git-prompt ]]; then
     git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
 fi
 
-# if [[ ! -d ~/.bash_it ]]; then
-#   git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it
-#   . ~/.bash_it/install.sh
-# fi
-#
-GIT_PROMPT_ONLY_IN_REPO=1
-source ~/.bash-git-prompt/gitprompt.sh
+eval "$(starship init bash)"
 
 # bash settings 
 set -o vi
