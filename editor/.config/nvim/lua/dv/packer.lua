@@ -133,4 +133,6 @@ return require('packer').startup(function(use)
     "vinnymeller/swagger-preview.nvim",
     run = "npm i",
   }
+
+  -- use 'Exafunction/windsurf.vim'
 end)
